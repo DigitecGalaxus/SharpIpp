@@ -21,6 +21,7 @@ namespace SharpIpp
         private static readonly Lazy<IMapper> MapperSingleton;
 
         private readonly bool _disposeHttpClient;
+        private readonly Uri? _cupsUri;
         private readonly HttpClient _httpClient;
         private readonly IIppProtocol _ippProtocol = new IppProtocol();
 
@@ -29,20 +30,25 @@ namespace SharpIpp
             MapperSingleton = new Lazy<IMapper>(MapperFactory);
         }
 
-        public SharpIppClient() : this(new HttpClient(), true)
+        public SharpIppClient() : this(null, new HttpClient(), true)
         {
         }
 
-        public SharpIppClient(HttpClient httpClient) : this(httpClient, false)
+        public SharpIppClient(HttpClient httpClient) : this(null, httpClient, false)
+        {
+        }
+        
+        public SharpIppClient(Uri cupsUri, HttpClient httpClient) : this(cupsUri, httpClient, false)
         {
         }
 
-        internal SharpIppClient(HttpClient httpClient, bool disposeHttpClient)
+        internal SharpIppClient(Uri? cupsUri, HttpClient httpClient, bool disposeHttpClient)
         {
+            _cupsUri = cupsUri;
             _httpClient = httpClient;
             _disposeHttpClient = disposeHttpClient;
         }
-
+        
         private IMapper Mapper => MapperSingleton.Value;
 
         /// <summary>
@@ -64,8 +70,7 @@ namespace SharpIpp
             IIppRequestMessage ippRequest,
             CancellationToken cancellationToken = default)
         {
-            var httpPrinter = new UriBuilder(printer) { Scheme = "http", Port = printer.Port }.Uri;
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, httpPrinter);
+            var httpRequest = BuildRequestMessage(printer);
 
             HttpResponseMessage? response;
 
@@ -129,6 +134,14 @@ namespace SharpIpp
             }
 
             throw httpException;
+        }
+
+        private HttpRequestMessage BuildRequestMessage(Uri printer)
+        {
+            var requestUri = _cupsUri == null
+                ? new UriBuilder(printer) {Scheme = "http", Port = printer.Port}.Uri 
+                : _cupsUri;
+            return new HttpRequestMessage(HttpMethod.Post, requestUri);
         }
 
         public void Dispose()
