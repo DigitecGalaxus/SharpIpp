@@ -6,9 +6,7 @@ It can print! And do other stuff with any printer, connected via Internet.
 
 ## Installation
 Available on [nuget][SharpCUPS.nuget]
-```bash
-PM> Install-Package SharpIpp
-```
+
 ### Connect to CUPS service on host
 ```csharp
 var cupsUri = new Uri("https://cupsPrintServer");
