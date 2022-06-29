@@ -5,11 +5,15 @@ C# implementation of [Internet Printing Protocol/1.1](https://tools.ietf.org/htm
 It can print! And do other stuff with any printer, connected via Internet.
 
 ## Installation
-Available on [nuget][SharpIpp.nuget]
+Available on [nuget][SharpCUPS.nuget]
 ```bash
 PM> Install-Package SharpIpp
 ```
-
+### Connect to CUPS service on host
+```csharp
+var cupsUri = new Uri("https://cupsPrintServer");
+var client = new SharpIppClient(cupsUri, httpClient);
+```
 ### It prints
 ```csharp
 await using var stream = File.Open(@"c:\file.pdf", FileMode.Open);
@@ -33,6 +37,7 @@ var request = new PrintJobRequest
     PrinterResolution = new Resolution(600, 600, ResolutionUnit.DotsPerInch),
     PrintQuality = PrintQuality.Normal
 };
+
 var response = await client.PrintJobAsync(request);
 ```
 
@@ -82,4 +87,4 @@ client.CustomOperationAsync("ipp://localhost:631", request);
 
 
 [SharpIpp.icon]: ipp64.png "SharpIpp Icon"
-[SharpIpp.nuget]: https://www.nuget.org/packages/SharpIpp
+[SharpIpp.nuget]: https://www.nuget.org/packages/SharpCUPS
