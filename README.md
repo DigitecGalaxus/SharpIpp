@@ -1,4 +1,4 @@
-# SharpIpp
+# SharpCUPS (based on SharpIPP)
 ![SharpIpp Icon][SharpIpp.icon]
 </br>
 C# implementation of [Internet Printing Protocol/1.1](https://tools.ietf.org/html/rfc2911) and some bits of [CUPS 1.0](http://www.cups.org/doc/spec-ipp.html).

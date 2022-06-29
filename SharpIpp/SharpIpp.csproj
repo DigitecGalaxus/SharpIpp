@@ -6,19 +6,26 @@
     <NullableReferenceTypes>true</NullableReferenceTypes>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <PackageIcon>ipp256.png</PackageIcon>
-    <PackageIconUrl />
-    <PackageProjectUrl>https://github.com/Zelenov/SharpIpp</PackageProjectUrl>
-    <Version>0.10.0.0</Version>
+    <Product>SharpCUPS</Product>
+    <PackageDescription>Sends IPP requests to a CUPS server (based on SharpIPP)</PackageDescription>
+    <RepositoryUrl>https://github.com/DigitecGalaxus/SharpIPP.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <Version>0.10.1</Version>
     <Authors>Evgeny Zelenov</Authors>
     <Description>C# implementation of Internet Printing Protocol/1.1 and CUPS 1.0</Description>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageId>SharpCUPS</PackageId>
+    <PackageIcon>ipp256.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageProjectUrl>https://github.com/DigitecGalaxus/SharpIpp</PackageProjectUrl>
     <PackageTags>ipp, Internet Printing Protocol, rfc2911, print, printer, cups</PackageTags>
     <PackageLicenseExpression>
     </PackageLicenseExpression>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Evgeny Zelenov</Copyright>
-    <RepositoryUrl>https://github.com/Zelenov/SharpIpp.git</RepositoryUrl> 
-    <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
    <ItemGroup>
     <None Include="..\ipp256.png">
@@ -31,11 +38,10 @@
       <PackagePath>
       </PackagePath>
     </None>
+     <None Include="..\README.md">
+       <Pack>True</Pack>
+       <PackagePath>
+       </PackagePath>
+     </None>
   </ItemGroup>
-   <ItemGroup>
-     <Content Include="..\README.md">
-       <Link>README.md</Link>
-     </Content>
-   </ItemGroup>
-
 </Project>
